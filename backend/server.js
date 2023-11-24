@@ -3,7 +3,7 @@ const fastify = require('fastify')({
 });
 
 fastify.register(require('@fastify/mysql'), {
-    connectionString: 'mysql://root:root9090@localhost:3306'
+    connectionString: 'mysql://root:root9090@localhost:3306/users'
 });
 
 require('./routes/routes')(fastify);
