@@ -1,7 +1,7 @@
 exports.usersRoutes = (fastify) => {
     fastify.get("/user", (request, reply) => {
         fastify.mysql.query(
-            "SELECT id, name, email FROM users",
+            "SELECT id, name, email FROM user_info",
             function onResult(error, result){
                 reply.send(error || result);
             }
@@ -10,7 +10,7 @@ exports.usersRoutes = (fastify) => {
 
     fastify.post("/user", (request, reply) => {
         fastify.mysql.query(
-            `INSERT INTO users (id, name, email) VALUES (
+            `INSERT INTO user_info (id, name, email) VALUES (
             '${request.body.id}',
             '${request.body.name}',
             '${request.body.email}'
@@ -23,7 +23,7 @@ exports.usersRoutes = (fastify) => {
 
     fastify.get("/user/:id", (request, reply) => {
         fastify.mysql.query(
-            `SELECT id, name, email FROM users WHERE users.id = ${Number(request.params.id)}`,
+            `SELECT id, name, email FROM user_info WHERE user_info.id = ${Number(request.params.id)}`,
             function onResult(error, result){
                 reply.send(error || result);
             }
@@ -32,10 +32,10 @@ exports.usersRoutes = (fastify) => {
 
     fastify.put("/user/:id", (request, reply) => {
         fastify.mysql.query(
-            `UPDATE users SET
+            `UPDATE user_info SET
             name = '${request.body.name}',
             email = '${request.body.email}' 
-            WHERE users.id = ${Number(request.params.id)}`,
+            WHERE user_info.id = ${Number(request.params.id)}`,
             function onResult(error, result){
                 reply.send(error || result);
             }
@@ -44,7 +44,7 @@ exports.usersRoutes = (fastify) => {
 
     fastify.delete("/user/:id", (request, reply) => {
         fastify.mysql.query(
-            `DELETE FROM users WHERE users.id = ${Number(request.params.id)}`,
+            `DELETE FROM user_info WHERE user_info.id = ${Number(request.params.id)}`,
             function onResult(error, result){
                 reply.send(error || result);
             }

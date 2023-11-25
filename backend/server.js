@@ -4,6 +4,8 @@ const fastify = require('fastify')({
 
 fastify.register(require('@fastify/mysql'), {
     connectionString: 'mysql://root:root9090@localhost:3306/users'
+}, (err) => {
+    if (err) throw err;
 });
 
 require('./routes/routes')(fastify);
